@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 
-def check() {
+def call() {
     echo 'checking the application...'
 } 

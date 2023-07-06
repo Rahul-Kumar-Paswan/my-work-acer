@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def buildImage() {
+def call() {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh 'docker build -t rahulkumarpaswan/python-demo:1.1 .'
