@@ -68,7 +68,7 @@ pipeline {
         }
     }
 
-    stage('Checkout') {
+    /* stage('Checkout') {
       steps {
         git(
           url: "https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git",
@@ -77,7 +77,7 @@ pipeline {
           poll: true
         )      
       }
-    }
+    } */
 
     stage('Git Commit Update') {
       steps {
