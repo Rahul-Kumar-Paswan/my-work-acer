@@ -95,7 +95,7 @@ pipeline {
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
-            sh 'git push -u origin main'
+            sh 'git push origin HEAD:main'
           }
         }
       }
