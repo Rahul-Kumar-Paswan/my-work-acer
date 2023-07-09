@@ -79,6 +79,7 @@ pipeline {
         script {
           echo "adding updates to git"
           withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'PASS' , usernameVariable: 'USER')]){
+            echo "Pass : ${PASS}"
             sh 'git config --global user.name "Rahul-Kumar-Paswan"'
             sh 'git config --global user.email "jekins@gmail.com"'
 
@@ -86,7 +87,8 @@ pipeline {
             sh 'git branch'
             sh 'git config --list'
 
-            sh "git remote set-url origin https://${USER}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            sh "git remote set-url origin https://Rahul-Kumar-Paswan:P@swan341@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            // https://Rahul-Kumar-Paswan:P@swan341@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
