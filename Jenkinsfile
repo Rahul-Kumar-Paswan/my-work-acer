@@ -45,8 +45,10 @@ pipeline {
       }
     }
 
-    stage('checking') {
+    stage('Clean Build Artifacts') {
       steps {
+        echo " hello dear welcome to  my world !!!!"
+        sh 'rm -rf build/ dist/ *.egg-info/'
         echo " hello dear welcome to  my world !!!!"
       }
     }
