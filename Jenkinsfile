@@ -93,7 +93,8 @@ pipeline {
             sh 'git branch'
             sh 'git config --list'
 
-            // sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            // 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
             sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
