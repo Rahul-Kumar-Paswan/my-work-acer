@@ -8,11 +8,12 @@ pipeline {
         script {
           echo " hello dear"
           def currentVersion = sh(
-                        script: "python3 -c \"import re; match = re.search(r'version=\\\\'(.*?)\\\\'', open('setup.py').read()); print(match.group(1) if match else '143')\"",
-                        returnStdout: true
-                    ).trim()
-
-                    echo "Current Version: ${currentVersion}"
+            script: "python3 -c \"import re; match = re.search(r'version=\\\\'(.*?)\\\\'', open('setup.py').read()); print(match.group(1) if match else '143')\"",
+              returnStdout: true
+              ).trim()
+          echo "Current Version: ${currentVersion}"
+          env.IMAGE_NAME = "$currentVersion-$BUILD_NUMBER"
+          echo "Current IMAGE_NAME: ${IMAGE_NAME}"
         }
       }
     }
