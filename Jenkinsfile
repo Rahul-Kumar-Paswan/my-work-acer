@@ -11,7 +11,19 @@ pipeline {
             script: "python3 -c \"import re; match = re.search(r'version=\\\\'(.*?)\\\\'', open('setup.py').read()); print(match.group(1) if match else '143')\"",
               returnStdout: true
               ).trim()
-          echo "Current Version: ${currentVersion}"
+          echo "Previous Version: ${currentVersion}"
+          // Split the version into major, minor, and patch parts
+                    def versionParts = currentVersion.split('.')
+                    
+                    // Increment the patch part
+                    versionParts[-1] = String.valueOf(versionParts[-1].toInteger() + 1)
+                    
+                    // Join the version parts back together
+                    def newVersion = versionParts.join('.')
+                    
+                    // Update the setup.py file with the new version
+                    sh "sed -i \"s/version='${currentVersion}'/version='${newVersion}'/\" setup.py"
+          echo "Current Version: ${newVersion}"
           env.IMAGE_NAME = "$currentVersion-$BUILD_NUMBER"
           echo "Current IMAGE_NAME: ${IMAGE_NAME}"
         }
@@ -27,9 +39,9 @@ pipeline {
     stage('build') {
       steps {
         echo "hello"
-        sh 'docker build -t my-python-project:1.2 .'
-        sh 'docker tag my-python-project:1.2 rahulkumarpaswan/my-python-project:1.2'
-        sh 'docker push rahulkumarpaswan/my-python-project:1.2'
+        sh "docker build -t my-python-project:${IMAGE_NAME} ."
+        sh "docker tag my-python-project:${IMAGE_NAME} rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
+        sh "docker push rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
       }
     }
 
