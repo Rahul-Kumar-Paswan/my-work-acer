@@ -14,12 +14,15 @@ pipeline {
           echo "Previous Version: ${currentVersion}"
           // Split the version into major, minor, and patch parts
                     def versionParts = currentVersion.split('.')
+                    echo "versionParts 1 Version: ${versionParts}"
                     
                     // Increment the patch part
                     versionParts[-1] = String.valueOf(versionParts[-1].toInteger() + 1)
+                    echo "versionParts 2 Version: ${versionParts}"
                     
                     // Join the version parts back together
                     def newVersion = versionParts.join('.')
+                    echo "newVersion Version: ${newVersion}"
                     
                     // Update the setup.py file with the new version
                     sh "sed -i \"s/version='${currentVersion}'/version='${newVersion}'/\" setup.py"
