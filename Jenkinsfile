@@ -53,12 +53,39 @@ pipeline {
       }
     }
     
-    stage('build') {
+    stage('Build Image') {
       steps {
         echo "hello"
         sh "docker build -t my-python-project:${IMAGE_NAME} ."
         sh "docker tag my-python-project:${IMAGE_NAME} rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
         sh "docker push rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        echo "Deploy to EC2........."
+        }
+    }
+
+    stage('Git Commit Update') {
+      steps {
+        script {
+          echo "adding updates to git"
+          withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'PASS' , usernameVariable: 'USER')]){
+            sh 'git config --global user.name "Rahul-Kumar-Paswan"'
+            sh 'git config --global user.email "jekins@gmail.com"'
+            
+            sh 'git status'
+            sh 'git branch'
+            sh 'git config --list'
+
+            sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            sh 'git add .'
+            sh 'git commit -m "cli: version updates"'
+            sh 'git push origin HEAD:main'
+          }
+        }
       }
     }
 
