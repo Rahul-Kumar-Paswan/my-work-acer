@@ -68,11 +68,11 @@ pipeline {
         }
     }
 
-    stage('Checkout') {
+    /* stage('Checkout') {
       steps {
         git credentialsId: 'git-credentials', url: 'https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
       }
-    }
+    } */
 
     stage('Git Commit Update') {
       steps {
