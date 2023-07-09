@@ -3,6 +3,17 @@ pipeline {
   
   stages{
 
+    stage('Checkout') {
+      steps {
+        git(
+          url: "https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git",
+          branch: "main",
+          changelog: true,
+          poll: true
+        )      
+      }
+    }
+
     stage('Increment Version') {
       steps {
         script {
@@ -68,16 +79,7 @@ pipeline {
         }
     }
 
-    /* stage('Checkout') {
-      steps {
-        git(
-          url: "https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git",
-          branch: "main",
-          changelog: true,
-          poll: true
-        )      
-      }
-    } */
+  
 
     stage('Git Commit Update') {
       steps {
@@ -91,7 +93,7 @@ pipeline {
             sh 'git branch'
             sh 'git config --list'
 
-            sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
+            // sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
