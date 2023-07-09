@@ -13,7 +13,17 @@ pipeline {
               ).trim()
           echo "Previous Version: ${currentVersion}"
           // Split the version into major, minor, and patch parts
-                    def versionParts = currentVersion.split('.')
+                    def versionParts = currentVersion.split('\\.')
+
+                    // Access the version parts using index
+                    def major = versionParts[0]
+                    def minor = versionParts[1]
+                    def patch = versionParts[2]
+
+                    echo "Current Version: ${currentVersion}"
+                    echo "Major: ${major}"
+                    echo "Minor: ${minor}"
+                    echo "Patch: ${patch}"
                     echo "versionParts 1 Version: ${versionParts}"
                     
                     // Increment the patch part
