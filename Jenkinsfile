@@ -85,7 +85,7 @@ pipeline {
       steps {
         script {
           echo "adding updates to git"
-          withCredentials([usernamePassword(credentialsId: 'git-auth',passwordVariable: 'PASS',usernameVariable: 'USER')]){
+          withCredentials([usernamePassword(credentialsId: 'git-credentials',passwordVariable: 'PASS',usernameVariable: 'USER')]){
             sh 'git config --global user.name "Rahul-Kumar-Paswan"'
             sh 'git config --global user.email "jekins@gmail.com"'
 
