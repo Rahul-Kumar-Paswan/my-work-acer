@@ -5,15 +5,15 @@ pipeline {
 
     stage('Increment Version') {
       steps {
-          script {
-            echo " hello dear"
-                    def currentVersion = sh(
-                        script: "python3 -c \"import re; match = re.search(r'version=(\\\\'.*\\\\')', open('setup.py').read()); print(match.group(1)[1:-1])\"",
+        script {
+          echo " hello dear"
+          def currentVersion = sh(
+                        script: "python3 -c \"import re; match = re.search(r'version=(\\\\'.*\\\\')', open('setup.py').read()); print(match.group(1)[1:-1] if match else '')\"",
                         returnStdout: true
                     ).trim()
 
                     echo "Current Version: ${currentVersion}"
-                }
+        }
       }
     }
 
