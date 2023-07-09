@@ -8,7 +8,7 @@ pipeline {
           script {
             echo " hello dear"
                     def currentVersion = sh(
-                        script: "python -c \"import re; match = re.search(r'version=(\\\\'.*\\\\')', open('setup.py').read()); print(match.group(1)[1:-1])\"",
+                        script: "python3 -c \"import re; match = re.search(r'version=(\\\\'.*\\\\')', open('setup.py').read()); print(match.group(1)[1:-1])\"",
                         returnStdout: true
                     ).trim()
 
