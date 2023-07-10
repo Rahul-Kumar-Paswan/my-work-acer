@@ -94,7 +94,7 @@ pipeline {
             sh 'git config --list'
 
             sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
-            // 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
+            // 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
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
@@ -104,33 +104,22 @@ pipeline {
       }
     } */
 
-
-    stage("Clone Git Repository") {
-            steps {
-                git(
-                    url: "https://github.com/Rahul-Kumar-Paswan/git-demo-1.git",
-                    branch: "main",
-                    changelog: true,
-                    poll: true
-                )
-            }
+    stage("Git Commit Update") {
+      steps {
+        git(
+          url: "https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git",
+          branch: "main",
+          changelog: true,
+          poll: true
+        )
+        sh "touch testfile1"
+        sh "git add testfile1"
+        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+        withCredentials([gitUsernamePassword(credentialsId: 'git-token', gitToolName: 'Default')]) {
+            sh "git push -u origin main"
         }
-    stage("Create artifacts or make changes") {
-            steps {
-                sh "touch testfile6"
-                sh "git add testfile6"
-                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
-            }
-        }
-        stage("Push to Git Repository") {
-            steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'git-token', gitToolName: 'Default')]) {
-                    sh "git push -u origin main"
-                }
-            }
-        }
-
-
+      }
+    }
 
 
   }
