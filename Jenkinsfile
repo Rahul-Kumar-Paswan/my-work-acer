@@ -94,7 +94,7 @@ pipeline {
             sh 'git config --list'
 
             sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
-            // 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
+            // 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
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
@@ -112,9 +112,17 @@ pipeline {
           changelog: true,
           poll: true
         )
-        sh "touch testfile1"
-        sh "git add testfile1"
-        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+        sh 'git config --global user.name "Rahul-Kumar-Paswan"'
+        sh 'git config --global user.email "jekins@gmail.com"'
+
+        sh 'git status'
+        sh 'git branch'
+        sh 'git config --list'
+        // sh "touch testfile1"
+        // sh "git add testfile1"
+        // sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+        sh 'git add .'
+        sh 'git commit -m "cli: version updates"'
         withCredentials([gitUsernamePassword(credentialsId: 'git-token', gitToolName: 'Default')]) {
             sh "git push -u origin main"
         }
