@@ -61,6 +61,7 @@ pipeline {
         echo " hello dear welcome to  my world !!!!"
         sh 'rm -rf build/ dist/ *.egg-info/'
         echo " hello dear welcome to  my world !!!!"
+        sh 'git status'
       }
     }
     
@@ -94,7 +95,7 @@ pipeline {
             sh 'git config --list'
 
             sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
-            // 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
+            // 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
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
