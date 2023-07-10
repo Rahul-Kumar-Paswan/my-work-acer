@@ -94,7 +94,7 @@ pipeline {
             sh 'git config --list'
 
             sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
-            // 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
+            // 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
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
@@ -117,8 +117,8 @@ pipeline {
         }
     stage("Create artifacts or make changes") {
             steps {
-                sh "touch testfile2"
-                sh "git add testfile2"
+                sh "touch testfile3"
+                sh "git add testfile3"
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
             }
         }
