@@ -81,7 +81,7 @@ pipeline {
 
   
 
-    stage('Git Commit Update') {
+    /* stage('Git Commit Update') {
       steps {
         script {
           echo "adding updates to git"
@@ -94,7 +94,7 @@ pipeline {
             sh 'git config --list'
 
             sh "git remote set-url origin https://${USER}:${PASS}@github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git"
-            // 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
+            // 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
             // sh 'git remote set-url origin https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git'
             sh 'git add .'
             sh 'git commit -m "cli: version updates"'
@@ -102,10 +102,36 @@ pipeline {
           }
         }
       }
-    }
+    } */
+
+
+    stage("Clone Git Repository") {
+            steps {
+                git(
+                    url: "https://github.com/Rahul-Kumar-Paswan/git-demo-1.git",
+                    branch: "main",
+                    changelog: true,
+                    poll: true
+                )
+            }
+        }
+    stage("Create artifacts or make changes") {
+            steps {
+                sh "touch testfile1"
+                sh "git add testfile1"
+                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+            }
+        }
+        stage("Push to Git Repository") {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'git-token', gitToolName: 'Default')]) {
+                    sh "git push -u origin main"
+                }
+            }
+        }
+
+
+
 
   }
 }
-
-
-
