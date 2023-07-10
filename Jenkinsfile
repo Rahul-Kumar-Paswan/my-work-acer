@@ -74,12 +74,6 @@ pipeline {
     
     stage("Git Commit Update") {
       steps {
-        // git(
-        //   url: "https://github.com/Rahul-Kumar-Paswan/Python-Project-1.6.git",
-        //   branch: "main",
-        //   changelog: true,
-        //   poll: true
-        // )
         sh 'git config --global user.name "Rahul-Kumar-Paswan"'
         sh 'git config --global user.email "jekins@gmail.com"'
 
