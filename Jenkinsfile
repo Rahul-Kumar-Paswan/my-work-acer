@@ -117,8 +117,8 @@ pipeline {
         }
     stage("Create artifacts or make changes") {
             steps {
-                sh "touch testfile1"
-                sh "git add testfile1"
+                sh "touch testfile2"
+                sh "git add testfile2"
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
             }
         }
