@@ -1,3 +1,11 @@
+#!/usr/bin/env groovy
+
+library identifier : 'jenkins-shared-library-1.2@main',retriever:modernSCM([
+    $class:'GitSCMSource',
+    remote:'https://github.com/Rahul-Kumar-Paswan/jenkins-shared-library-1.2.git',
+    credentialsId:'git-credentials'
+])
+
 pipeline {
   agent any
   
@@ -60,6 +68,10 @@ pipeline {
         sh "docker build -t my-python-project:${IMAGE_NAME} ."
         sh "docker tag my-python-project:${IMAGE_NAME} rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
         sh "docker push rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
+
+        buildImage "my-python-project:${IMAGE_NAME}"
+        dockerLogin()
+        dockerPush "my-python-project:${IMAGE_NAME}"
       }
     }
 
