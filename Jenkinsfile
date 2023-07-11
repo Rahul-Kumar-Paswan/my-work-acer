@@ -71,7 +71,7 @@ pipeline {
 
         buildImage "my-python-project:${IMAGE_NAME}"
         dockerLogin()
-        dockerPush "my-python-project:${IMAGE_NAME}"
+        dockerPush "rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
       }
     }
 
