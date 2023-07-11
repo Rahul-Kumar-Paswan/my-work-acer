@@ -65,9 +65,9 @@ pipeline {
     stage('Build Image') {
       steps {
         echo "hello"
-        sh "docker build -t my-python-project:${IMAGE_NAME} ."
+        /* sh "docker build -t my-python-project:${IMAGE_NAME} ."
         sh "docker tag my-python-project:${IMAGE_NAME} rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
-        sh "docker push rahulkumarpaswan/my-python-project:${IMAGE_NAME}"
+        sh "docker push rahulkumarpaswan/my-python-project:${IMAGE_NAME}" */
 
         buildImage "my-python-project:${IMAGE_NAME}"
         dockerLogin()
