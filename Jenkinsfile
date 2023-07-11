@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "checking"
-                    gv.check()
+                    gv.buildJar()
                 }
             }
         }
