@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 
+@Library('jenkins-shared-library-1.2')
+
 def gv
 
 pipeline {
@@ -16,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo "checking"
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
@@ -24,7 +26,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    gv.buildImage()
+                    buildImage()
                 }
             }
         }
