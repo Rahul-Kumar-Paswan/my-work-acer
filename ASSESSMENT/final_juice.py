@@ -40,4 +40,3 @@ for i in bill:
 print(f"{line*40}")
 print(f"{' '*45}TOTAL AMOUNT : {sum}")
 print(f"{line*40}")
-

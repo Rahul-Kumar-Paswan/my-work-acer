@@ -41,4 +41,3 @@ if a < b:
     print("PLAYER 1 IS WINNER")
 else:
     print("PLAYER 2 IS WINNER")
-    

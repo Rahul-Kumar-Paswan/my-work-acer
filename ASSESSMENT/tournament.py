@@ -189,5 +189,3 @@ n=int(input("Enter number of overs lessthan 5 :"))
 cricket = Tournament(team1,team2,team1_dic,team2_dic,n)
 print("---------- TOSS -----------")
 cricket.toss()
-
-
