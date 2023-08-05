@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-deploy
+  labels:
+    appname: my-deploy
+  annotations:
+    kubernetes.io/change-cause: "my first message"
+spec:
+  replicas: 4
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: demo 
+  template:
+    metadata:
+      name: my-project
+      labels:
+        app: demo 
+    spec:
+      containers:
+        - name: my-project-container
+          image: rahulkumarpaswan/my-python-project:1.1
+          

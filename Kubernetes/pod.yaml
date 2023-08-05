@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-project
+  labels:
+    app: demo
+spec:
+  containers:
+  - name: my-project-container
+    image: rahulkumarpaswan/my-python-project:1.1
+
