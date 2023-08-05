@@ -1,0 +1,9 @@
+wordpressUsername: rahul
+wordpressPassword: rahul
+wordpressEmail: contact@rahul.com
+wordpressFirstName: Rahul
+wordpressLastName: boss
+wordpressBlogName: boss.com
+service: 
+  type: NodePort
+
