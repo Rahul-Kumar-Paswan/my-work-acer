@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-deploy
+  labels:
+    appname: my-deploy
+spec:
+  replicas: 10
+  # minReadySeconds: 30
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 0
+  #     maxUnavailable: 1
+  #   type: RollingUpdate
+  selector:
+    matchLabels:
+      app: app 
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: app 
+    spec:
+      containers:
+        - name: my-pod1
+          image: nginx

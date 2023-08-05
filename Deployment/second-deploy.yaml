@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-deploy
+  labels:
+    appname: my-deploy
+  annotations:
+    kubernetes.io/change-cause: "my first message"
+spec:
+  replicas: 10
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: app 
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: app 
+    spec:
+      containers:
+        - name: my-pod1
+          image: nginx:1.16
