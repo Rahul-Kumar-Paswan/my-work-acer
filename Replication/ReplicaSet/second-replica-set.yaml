@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: second-replica-set
+  labels:
+    appname: my-app
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - app 
+          - app1
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: app 
+    spec:
+      containers:
+        - name: my-pod1
+          image: nginx:1.14.2
+          
