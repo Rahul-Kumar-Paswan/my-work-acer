@@ -17,7 +17,6 @@ class Docker implements Serializable {
         script.sh "docker push $imageName"
     }
     def dockerLogin(){
-        script.withCredentials([script.usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+        script.withCredentials([script.usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) 
     }
-
 }
