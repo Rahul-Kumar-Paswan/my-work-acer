@@ -1,0 +1,77 @@
+---
+- name: Install Docker 
+  hosts: ansible_docker 
+  become: true
+  # vars_files:
+  #   - ansible-vars
+
+  tasks:
+    - name: Make Sure Docker is Installed
+      # vars: 
+      #   ansible_python_interpreter: /usr/bin/python
+      dnf: 
+        name: docker 
+        update_cache: yes 
+        state: present
+      register: user_creation_result
+    - debug: msg={{user_creation_result}}
+
+
+- name: Install Docker-Compose
+  hosts: ansible_docker 
+  become: true
+  tasks:
+    - name: Install Docker-Compose 
+      get_url:
+        url: https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-{{lookup('pipe','uname -m')}}
+        dest: /usr/local/bin/docker-compose
+        mode: +x
+      register: user_creation_result
+    - debug: msg={{user_creation_result}}
+
+
+- name: start docker 
+  hosts: ansible_docker 
+  become: true
+  tasks:
+    - name: Ensure docker is running
+      systemd:
+        name: docker
+        state: started
+    # - name: Install Docker Python Module
+    #   vars: 
+    #     ansible_python_interpreter: /usr/bin/python
+    #   pip:
+    #    name: docker
+
+
+- name: Create New User 
+  hosts: ansible_docker
+  become: true
+  tasks:
+    - name: add ec2-user to Docker
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+    - name: Reconnect to server
+      meta: reset_connection
+
+
+# - name: Testing Docker 
+#   hosts: ansible_docker
+#   become: true
+#   tasks:
+#     - name: pull redis
+#       vars: 
+#         ansible_python_interpreter: /usr/bin/python
+#       docker_image:
+#         name: redis
+#         source: pull
+
+- name: Testing Docker 
+  hosts: ansible_docker
+  become: true
+  tasks:
+    - name: pull redis
+      command: docker pull redis
