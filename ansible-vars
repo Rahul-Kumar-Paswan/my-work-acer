@@ -1,0 +1,4 @@
+Linux_user: rahul
+Linux_group: admin
+src_location: /root/Ansible/ansible-demo-python-project
+dest_location: /home/{{Linux_user}}
