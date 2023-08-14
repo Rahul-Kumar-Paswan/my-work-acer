@@ -1,0 +1,52 @@
+---
+- name: Create New User 
+  hosts: webserver
+  become: true
+  vars_files:
+    - ansible-vars
+
+  tasks:
+    - name: Create group
+      group:
+        name: "{{Linux_group}}"
+        state: present
+    - name: Creating user on ec2
+      user:
+        name: "{{Linux_user}}"
+        comment:  Rahul admin
+        group: "{{Linux_group}}"
+        state: present
+      register: user_creation_result
+    - debug: msg={{user_creation_result}}
+
+
+- name: Python Project on EC2
+  hosts: webserver
+  become: true
+  # become_user: "{{Linux_user}}"
+  gather_facts: false
+  vars_files:
+    - ansible-vars
+
+  tasks:
+
+    - name: Copy Python project package to remote host
+      copy:
+        src: "{{src_location}}"
+        dest: "{{dest_location}}"
+      register: user_creation_result
+    - debug: msg={{user_creation_result}}
+
+    - name: Install Python 3 pip package
+      dnf:
+        name: python3-pip
+        update_cache: true
+        state: present
+
+    - name: Install Dependencies
+      pip:
+        requirements: /home/{{Linux_user}}/ansible-demo-python-project/requirements.txt
+
+    - name: Run Python Project
+      command:
+        cmd: python3 /home/{{Linux_user}}/ansible-demo-python-project/project_package/main.py
