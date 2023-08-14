@@ -1,0 +1,16 @@
+---
+- name: Configure nginx server
+  hosts: webserver
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install nginx server
+      dnf:
+        name: nginx
+        state: latest
+
+    - name: Start nginx server
+      service:
+        name: nginx
+        state: started
